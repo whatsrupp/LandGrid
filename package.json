@@ -6,8 +6,11 @@
   "repository": "git@github.com:whatsrupp/LandGrid.git",
   "author": "whatsrupp <nickrupp95@gmail.com>",
   "license": "MIT",
-  "private": false,
-
+  "private": true,
+  "scripts": {
+    "client": "yarn workspace client start",
+    "server": "yarn workspace server start"
+  },
   "workspaces": [
     "client",
     "server"
