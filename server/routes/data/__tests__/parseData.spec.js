@@ -1,4 +1,4 @@
-const parseData = require('./parseData')
+const parseData = require('../parseData')
 const path = require('path');
 
 describe("dataParser()", () => {
