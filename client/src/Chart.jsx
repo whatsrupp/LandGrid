@@ -24,7 +24,7 @@ const Chart = () => {
                 bottom: "20%",
             },
           
-            xAxis: {name: 'x coordinate (m)',
+            xAxis: {name: 'x coordinate (km)',
             nameLocation: 'center',
             nameGap: 30,
             splitLine: {show: false},
