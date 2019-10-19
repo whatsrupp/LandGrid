@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import GlobalStyle from './globalStyle';
+import Chart from './Chart';
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -13,7 +14,8 @@ function App() {
   return (
     <>
       <StyledApp>
-
+        
+      <Chart/>
       </StyledApp>
     <GlobalStyle />
     </>
