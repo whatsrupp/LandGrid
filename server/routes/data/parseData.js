@@ -25,10 +25,7 @@ const parseData = async (filePath) => {
     const enhancedData = parsedData.map((row)=>{
 
         const percentile = (row.price/maxPrice) * 100;
-        return({
-            ...row,
-            percentile
-        })
+        return [row.x, row.y, row.price, percentile]
     })
     return enhancedData
 }
