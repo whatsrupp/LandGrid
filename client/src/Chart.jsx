@@ -1,27 +1,39 @@
-import React, {useRef, useEffect} from 'react';
+import axios from 'axios';
+import React, {useRef, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import echarts from 'echarts';
 
 const ChartContainer = styled.div`
-    height: 600px;
-    width: 600px;
-    max-width: 500px;
-    max-height: 500px;
+    height: 100%;
+    width: 90vmin;
+  
 `;
 
 const Chart = () => {
 
     const chartContainerRef = useRef(null);
+    const [data, setData] = useState(null);
+    
+      useEffect(()=>{
+          const getData = async ()=>{
+              const result = await axios.get('http://localhost:3001')
+              setData(result.data)
+          }
+          getData();
+      }, [])
+
+
     useEffect(() => {
         if (!chartContainerRef) return;
         const chart = echarts.init(chartContainerRef.current)
-
+        const padding  = "30px"
+        const legendPadding = "100px"
         chart.setOption({
             grid:{
-                left: "20%",
-                right: "20%",
-                top: "20%",
-                bottom: "20%",
+                left: padding,
+                right: legendPadding,
+                top: padding,
+                bottom: padding,
             },
           
             xAxis: {name: 'x coordinate (km)',
@@ -70,21 +82,23 @@ const Chart = () => {
                 }
             }},
             visualMap: [{
-                left: 'right',
-                top: '10%',
                 type: 'piecewise',
                 dimension: 3,
                 textStyle: {
                     color: '#fff'
                 },
                 orient: 'vertical',
-                top: "20%",
+                right: 0,
+
+                top: padding,
+                // top: '10%',
+                // padding: "10px",
                 pieces: [
-                    {min: 0, max: 5, label: "0% to 5%" },
-                    {min: 5, max: 25, label: "5% to 25%"},
-                    {min: 25, max: 75, label: "25% to 75%"},
-                    {min: 75, max: 95, label: "75% to 95%"},
-                    {min: 95, max: 100, label: "95% to 100%"}
+                    {min: 0, max: 5, label: "0 - 5%" },
+                    {min: 5, max: 25, label: "5 - 25%"},
+                    {min: 25, max: 75, label: "25 - 75%"},
+                    {min: 75, max: 95, label: "75 - 95%"},
+                    {min: 95, max: 100, label: "95 - 100%"}
                 ],
                
             }],
@@ -96,36 +110,21 @@ const Chart = () => {
                 borderWidth: 1,
                 formatter: ({data})=>{
                     const [x,y,price,percentile] = data;
-                    const templateString = `Coordinates: (${x}, ${y})<br/>Price: £${price}<br/> Percentile: ${percentile}%`
+                    const templateString = `Coordinates: (${x}, ${y})<br/>Price: £${price}<br/> Percentile: ${percentile.toFixed(2)}%`
                     return templateString
                 }
             },
             series: [{
                 name: 'Land Prices',
 
-                symbolSize: 20,
-                data: [
-                    [10.0, 8.04, 2, 50],
-                    [8.0, 6.95, 3, 100],
-                    [13.0, 7.58, 4, 20],
-                    [9.0, 8.81, 5, 30],
-                    [11.0, 8.33, 6, 20],
-                    [14.0, 9.96, 4, 21],
-                    [6.0, 7.24, 3, 0],
-                    [4.0, 4.26, 4, 4],
-                    [12.0, 10.84, 5, 5],
-                    [7.0, 4.82, 3, 25],
-                    [5.0, 5.68, 4, 80]
-                ],
+                symbolSize: 7,
+                data,
 
                
                 type: 'scatter'
             }]})
 
-      }, [
-        
-        chartContainerRef
-      ]);
+      }, [chartContainerRef, data]);
     
 
     return(
@@ -134,3 +133,5 @@ const Chart = () => {
 }
 
 export default Chart 
+
+
