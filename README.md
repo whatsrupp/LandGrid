@@ -19,6 +19,11 @@ This data is then plotted on an interactive graph where users can:
 ![app-screenshot](./assets/screenshot.png)
 
 ## Running the App
+
+### Live
+
+A demo of this app can be found at [http://www.whatsrupp.com/land-grid](http://www.whatsrupp.com/land-grid)
+
 ### Locally
 
 #### Prerequesites:
