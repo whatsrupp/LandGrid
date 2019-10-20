@@ -6,7 +6,7 @@ services:
     container_name: client
     command: sh -c "yarn && yarn start"
     ports:
-      - '3001:3000'
+      - '3000:3000'
     working_dir: /root/client
     volumes:
       - ./client:/root/client:cached
@@ -16,7 +16,7 @@ services:
     container_name: server
     command: sh -c "yarn && yarn start"
     ports:
-      - '3000:3000'
+      - '3001:3000'
     working_dir: /root/server
     volumes:
       - ./server:/root/server:cached
