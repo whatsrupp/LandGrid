@@ -26,7 +26,7 @@ const Chart = () => {
     useEffect(() => {
         if (!chartContainerRef) return;
         const chart = echarts.init(chartContainerRef.current)
-        const padding  = "30px"
+        const padding  = "50px"
         const legendPadding = "100px"
         chart.setOption({
             grid:{
